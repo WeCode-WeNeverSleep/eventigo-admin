@@ -129,9 +129,18 @@ export const dataProvider: DataProvider = {
         throw new Error("getMany is not implemented yet");
     },
 
-    getManyReference: async () => {
-        throw new Error("getManyReference is not implemented yet");
-    },
+   getManyReference: async (resource, params) => {
+    if (resource === "sessions" && params.target === "eventId") {
+        const data = await httpClient(getSessionResourceUrl(String(params.id)));
+
+        return {
+            data,
+            total: data.length,
+        };
+    }
+
+    throw new Error(`getManyReference is not implemented for ${resource}`);
+},
 
     updateMany: async () => {
         throw new Error("updateMany is not implemented yet");

@@ -38,11 +38,5 @@ export const App = () => (
             create={SpeakerCreate}
             edit={SpeakerEdit}
         />
-        <Resource
-            name="sessions"
-            list={SessionList}
-            create={SessionCreate}
-            edit={SessionEdit}
-        />
     </Admin>
 );
