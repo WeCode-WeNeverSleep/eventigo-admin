@@ -9,13 +9,20 @@ import {
     SimpleForm,
     TextInput,
 } from "react-admin";
+import { useSearchParams } from "react-router-dom";
 import { transformSessionPayload } from "./sessionTransforms";
 
 export function SessionEdit() {
+    const [searchParams] = useSearchParams();
+    const eventId = searchParams.get("eventId");
+
     return (
-        <Edit transform={transformSessionPayload}>
+        <Edit
+            queryOptions={{ meta: { eventId } }}
+            mutationOptions={{ meta: { eventId } }}
+            transform={transformSessionPayload}
+        >
             <SimpleForm>
-                <TextInput source="eventId" label="Event ID" required />
                 <TextInput source="title" label="Title" required />
                 <TextInput source="description" label="Description" multiline />
                 <DateTimeInput source="startTime" label="Start time" required />
