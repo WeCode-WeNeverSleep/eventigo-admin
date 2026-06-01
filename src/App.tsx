@@ -1,4 +1,10 @@
-import { Admin } from "react-admin";
-import { Layout } from "./Layout";
+import { Admin, Resource } from "react-admin";
+import { dataProvider } from "./providers/dataProvider";
 
-export const App = () => <Admin layout={Layout}></Admin>;
+export const App = () => (
+    <Admin dataProvider={dataProvider}>
+        <Resource name="events" />
+        <Resource name="rooms" />
+        <Resource name="speakers" />
+    </Admin>
+);
