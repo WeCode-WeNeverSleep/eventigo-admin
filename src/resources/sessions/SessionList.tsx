@@ -17,7 +17,6 @@ export function SessionList() {
                 <NumberField source="capacity" />
                 <DateField source="startTime" showTime />
                 <DateField source="endTime" showTime />
-                <EditButton />
             </Datagrid>
         </List>
     );

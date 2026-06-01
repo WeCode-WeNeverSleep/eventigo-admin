@@ -3,7 +3,6 @@ import {
     DateTimeInput,
     Datagrid,
     Edit,
-    EditButton,
     NumberField,
     ReferenceManyField,
     SimpleForm,
@@ -11,6 +10,7 @@ import {
     TextInput,
 } from "react-admin";
 import { transformEventPayload } from "./eventTransforms";
+import { EditSessionButton } from "../sessions/EditSessionButton";
 
 export function EventEdit() {
     return (
@@ -33,7 +33,7 @@ export function EventEdit() {
                         <NumberField source="capacity" />
                         <DateField source="startTime" showTime />
                         <DateField source="endTime" showTime />
-                        <EditButton />
+                        <EditSessionButton />
                     </Datagrid>
                 </ReferenceManyField>
             </SimpleForm>
