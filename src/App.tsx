@@ -14,6 +14,10 @@ import { SpeakerCreate } from "./resources/speakers/SpeakerCreate";
 import { SpeakerEdit } from "./resources/speakers/SpeakerEdit";
 import { SpeakerList } from "./resources/speakers/SpeakerList";
 
+import { SessionCreate } from "./resources/sessions/SessionCreate";
+import { SessionEdit } from "./resources/sessions/SessionEdit";
+import { SessionList } from "./resources/sessions/SessionList";
+
 export const App = () => (
     <Admin dataProvider={dataProvider} authProvider={authProvider}>
         <Resource
@@ -33,6 +37,12 @@ export const App = () => (
             list={SpeakerList}
             create={SpeakerCreate}
             edit={SpeakerEdit}
+        />
+        <Resource
+            name="sessions"
+            list={SessionList}
+            create={SessionCreate}
+            edit={SessionEdit}
         />
     </Admin>
 );
