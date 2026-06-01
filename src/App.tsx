@@ -3,9 +3,10 @@ import { dataProvider } from "./providers/dataProvider";
 import { RoomCreate } from "./resources/rooms/RoomCreate";
 import { RoomEdit } from "./resources/rooms/RoomEdit";
 import { RoomList } from "./resources/rooms/RoomList";
+import { authProvider } from "./providers/authProvider";
 
 export const App = () => (
-    <Admin dataProvider={dataProvider}>
+    <Admin dataProvider={dataProvider} authProvider={authProvider}>
         <Resource name="events" />
         <Resource
             name="rooms"
