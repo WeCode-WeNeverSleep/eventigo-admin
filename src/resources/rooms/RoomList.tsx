@@ -1,4 +1,4 @@
-import { Datagrid, List, TextField } from "react-admin";
+import { Datagrid, EditButton, List, TextField } from "react-admin";
 
 export function RoomList() {
     return (
@@ -6,6 +6,7 @@ export function RoomList() {
             <Datagrid rowClick="edit">
                 <TextField source="id" />
                 <TextField source="name" />
+                <EditButton />
             </Datagrid>
         </List>
     );
