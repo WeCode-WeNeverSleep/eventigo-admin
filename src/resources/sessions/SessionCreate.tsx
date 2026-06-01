@@ -9,13 +9,16 @@ import {
     SimpleForm,
     TextInput,
 } from "react-admin";
+import { useSearchParams } from "react-router-dom";
 import { transformSessionPayload } from "./sessionTransforms";
 
 export function SessionCreate() {
+    const [searchParams] = useSearchParams();
+    const eventId = searchParams.get("eventId");
+
     return (
         <Create transform={transformSessionPayload}>
-            <SimpleForm>
-                <TextInput source="eventId" label="Event ID" required />
+            <SimpleForm defaultValues={{ eventId }}>
                 <TextInput source="title" label="Title" required />
                 <TextInput source="description" label="Description" multiline />
                 <DateTimeInput source="startTime" label="Start time" required />
