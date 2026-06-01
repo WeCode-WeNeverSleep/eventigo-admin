@@ -1,8 +1,8 @@
 import EditIcon from "@mui/icons-material/Edit";
-import { Button, useRecordContext } from "react-admin";
+import { Button, type Identifier, useRecordContext } from "react-admin";
 
 type EditSessionButtonProps = {
-    eventId: string;
+    eventId?: Identifier;
 };
 
 export function EditSessionButton({ eventId }: EditSessionButtonProps) {
@@ -12,10 +12,16 @@ export function EditSessionButton({ eventId }: EditSessionButtonProps) {
         return null;
     }
 
+    const sessionEventId = eventId ?? session.eventId;
+
+    if (!sessionEventId) {
+        return null;
+    }
+
     return (
         <Button
             component="a"
-            href={`#/sessions/${session.id}?eventId=${eventId}`}
+            href={`#/sessions/${session.id}?eventId=${String(sessionEventId)}`}
             label="Edit"
         >
             <EditIcon />

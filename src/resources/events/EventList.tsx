@@ -21,7 +21,12 @@ export function EventList() {
                     reference="sessions"
                     target="eventId"
                 >
-                    <Datagrid bulkActionButtons={false}>
+                    <Datagrid
+                        bulkActionButtons={false}
+                        rowClick={(id, _resource, record) =>
+                            `#/sessions/${id}?eventId=${String(record.eventId)}`
+                        }
+                    >
                         <TextField source="title" />
                         <TextField source="room.name" label="Room" />
                         <NumberField source="capacity" />
