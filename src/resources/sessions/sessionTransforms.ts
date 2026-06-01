@@ -3,6 +3,7 @@ import type { RaRecord } from "react-admin";
 type SessionFormData = RaRecord & {
     startTime?: string;
     endTime?: string;
+    speakerIds?: string[];
 };
 
 export const transformSessionPayload = (data: SessionFormData) => ({
@@ -13,4 +14,5 @@ export const transformSessionPayload = (data: SessionFormData) => ({
     endTime: data.endTime
         ? new Date(data.endTime).toISOString()
         : data.endTime,
+    speakerIds: data.speakerIds ?? [],
 });

@@ -1,16 +1,21 @@
 import EditIcon from "@mui/icons-material/Edit";
 import { Button, useRecordContext } from "react-admin";
-import { Link } from "react-router-dom";
 
-export function EditSessionButton() {
+type EditSessionButtonProps = {
+    eventId: string;
+};
+
+export function EditSessionButton({ eventId }: EditSessionButtonProps) {
     const session = useRecordContext();
 
-    if (!session) return null;
+    if (!session) {
+        return null;
+    }
 
     return (
         <Button
-            component={Link}
-            to={`/sessions/${session.id}?eventId=${session.eventId}`}
+            component="a"
+            href={`#/sessions/${session.id}?eventId=${eventId}`}
             label="Edit"
         >
             <EditIcon />

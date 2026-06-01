@@ -20,6 +20,7 @@ export function SessionEdit() {
         <Edit
             queryOptions={{ meta: { eventId } }}
             mutationOptions={{ meta: { eventId } }}
+            mutationMode="pessimistic"
             transform={transformSessionPayload}
         >
             <SimpleForm>
