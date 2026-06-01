@@ -2,6 +2,10 @@ import { Admin, Resource } from "react-admin";
 import { dataProvider } from "./providers/dataProvider";
 import { authProvider } from "./providers/authProvider";
 
+import { EventCreate } from "./resources/events/EventCreate";
+import { EventEdit } from "./resources/events/EventEdit";
+import { EventList } from "./resources/events/EventList";
+
 import { RoomCreate } from "./resources/rooms/RoomCreate";
 import { RoomEdit } from "./resources/rooms/RoomEdit";
 import { RoomList } from "./resources/rooms/RoomList";
@@ -12,7 +16,12 @@ import { SpeakerList } from "./resources/speakers/SpeakerList";
 
 export const App = () => (
     <Admin dataProvider={dataProvider} authProvider={authProvider}>
-        <Resource name="events" />
+        <Resource
+            name="events"
+            list={EventList}
+            create={EventCreate}
+            edit={EventEdit}
+        />
         <Resource
             name="rooms"
             list={RoomList}
