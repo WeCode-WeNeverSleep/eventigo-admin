@@ -53,7 +53,7 @@ function EventSessionsList() {
 
 export function EventEdit() {
     return (
-        <Edit transform={transformEventPayload}>
+        <Edit redirect="list" transform={transformEventPayload}>
             <SimpleForm>
                 <TextInput source="title" label="Title" required />
                 <TextInput source="description" label="Description" multiline />

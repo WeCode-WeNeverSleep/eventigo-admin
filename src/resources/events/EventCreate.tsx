@@ -9,7 +9,7 @@ import { transformEventPayload } from "./eventTransforms";
 
 export function EventCreate() {
     return (
-        <Create transform={transformEventPayload}>
+        <Create redirect="list" transform={transformEventPayload}>
             <SimpleForm>
                 <TextInput source="title" label="Title" required />
                 <TextInput source="description" label="Description" multiline />

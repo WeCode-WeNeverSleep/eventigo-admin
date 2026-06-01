@@ -3,7 +3,7 @@ import { transformSpeakerPayload } from "./speakerTransforms";
 
 export function SpeakerCreate() {
     return (
-        <Create transform={transformSpeakerPayload}>
+        <Create redirect="list" transform={transformSpeakerPayload}>
             <SimpleForm>
                 <TextInput source="fullName" label="Full name" required />
                 <TextInput source="avatarUrl" label="Avatar URL" />
