@@ -1,39 +1,24 @@
 import {
     Datagrid,
     DateField,
+    FunctionField,
     List,
-    NumberField,
-    ReferenceManyField,
     TextField,
 } from "react-admin";
 
 export function EventList() {
     return (
         <List>
-            <Datagrid rowClick="edit">
+            <Datagrid rowClick="show">
                 <TextField source="id" />
                 <TextField source="title" />
                 <TextField source="location" />
                 <DateField source="startDate" showTime />
                 <DateField source="endDate" showTime />
-                <ReferenceManyField
+                <FunctionField
                     label="Sessions"
-                    reference="sessions"
-                    target="eventId"
-                >
-                    <Datagrid
-                        bulkActionButtons={false}
-                        rowClick={(id, _resource, record) =>
-                            `#/sessions/${id}?eventId=${String(record.eventId)}`
-                        }
-                    >
-                        <TextField source="title" />
-                        <TextField source="room.name" label="Room" />
-                        <NumberField source="capacity" />
-                        <DateField source="startTime" showTime />
-                        <DateField source="endTime" showTime />
-                    </Datagrid>
-                </ReferenceManyField>
+                    render={(record) => record._count?.sessions ?? 0}
+                />
             </Datagrid>
         </List>
     );

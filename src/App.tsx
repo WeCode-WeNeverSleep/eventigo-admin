@@ -16,6 +16,7 @@ import { SpeakerList } from "./resources/speakers/SpeakerList";
 
 import { SessionCreate } from "./resources/sessions/SessionCreate";
 import { SessionEdit } from "./resources/sessions/SessionEdit";
+import { EventShow } from "./resources/events/EventShow";
 
 export const App = () => (
     <Admin dataProvider={dataProvider} authProvider={authProvider}>
@@ -24,6 +25,7 @@ export const App = () => (
             list={EventList}
             create={EventCreate}
             edit={EventEdit}
+            show={EventShow}
         />
         <Resource
             name="rooms"
@@ -37,6 +39,10 @@ export const App = () => (
             create={SpeakerCreate}
             edit={SpeakerEdit}
         />
-        <Resource name="sessions" edit={SessionEdit} create={SessionCreate}/>
+        <Resource 
+            name="sessions" 
+            edit={SessionEdit} 
+            create={SessionCreate} 
+        />
     </Admin>
 );
