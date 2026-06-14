@@ -16,16 +16,31 @@ export function AdminSidebarBrand() {
             }}
         >
             <Box
-                component="img"
-                src="/assets/logo.png"
-                alt="EventiGo"
                 sx={{
-                    width: 34,
-                    height: 34,
-                    objectFit: "contain",
+                    width: 38,
+                    height: 38,
                     flexShrink: 0,
+                    borderRadius: "50%",
+                    border: "2px solid",
+                    borderColor: "primary.main",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "#070E15",
+                    overflow: "hidden",
                 }}
-            />
+            >
+                <Box
+                    component="img"
+                    src="/assets/logo.png"
+                    alt="EventiGo"
+                    sx={{
+                        width: 28,
+                        height: 28,
+                        objectFit: "contain",
+                    }}
+                />
+            </Box>
 
             <Box
                 sx={{
