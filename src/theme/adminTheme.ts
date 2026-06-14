@@ -4,6 +4,8 @@ import {
     type RaThemeOptions,
 } from "react-admin";
 
+import type { Theme } from "@mui/material/styles";
+
 export const darkTheme: RaThemeOptions = {
     ...defaultDarkTheme,
     palette: {
@@ -81,36 +83,36 @@ export const darkTheme: RaThemeOptions = {
         },
         MuiIconButton: {
             styleOverrides: {
-                root: {
-                    color: "#13DCF6",
-                    border: "1px solid rgba(19,220,246,0.25)",
-                    backgroundColor: "rgba(19,220,246,0.08)",
+                root: ({ theme }: { theme: Theme }) => ({
+                    color: theme.palette.primary.main,
+                    border: `1px solid ${theme.palette.primary.main}`,
+                    backgroundColor: `${theme.palette.primary.main}14`,
 
                     "&:hover": {
-                        backgroundColor: "rgba(19,220,246,0.16)",
+                        backgroundColor: `${theme.palette.primary.main}26`,
                     },
-                },
+                }),
             },
         },
         RaMenuItemLink: {
             styleOverrides: {
-                root: {
+                root: ({ theme }: { theme: Theme }) => ({
                     borderRadius: 12,
                     margin: "4px 8px",
                     fontWeight: 700,
 
                     "&:hover": {
-                        backgroundColor: "rgba(0, 148, 205, 0.10)",
-                        color: "#0094CD",
+                        backgroundColor: `${theme.palette.primary.main}14`,
+                        color: theme.palette.primary.main,
                     },
 
                     "&.RaMenuItemLink-active": {
-                        backgroundColor: "rgba(0, 148, 205, 0.16)",
-                        color: "#0094CD",
+                        backgroundColor: `${theme.palette.primary.main}26`,
+                        color: theme.palette.primary.main,
                         fontWeight: 800,
-                        borderLeft: "3px solid #0094CD",
+                        borderLeft: `3px solid ${theme.palette.primary.main}`,
                     },
-                },
+                }),
             },
         },
     },
