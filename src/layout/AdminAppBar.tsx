@@ -1,4 +1,4 @@
-import { AppBar, ToggleThemeButton } from "react-admin";
+import { AppBar } from "react-admin";
 
 export function AdminAppBar() {
     return (
