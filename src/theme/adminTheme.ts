@@ -72,6 +72,11 @@ export const darkTheme: RaThemeOptions = {
                     backgroundColor: "#0E1720",
                     borderRight: "1px solid rgba(255,255,255,0.08)",
                 },
+                root: {
+                    borderRadius: 20,
+                    border: "1px solid rgba(19,220,246,0.08)",
+                    backgroundImage: "none",
+                },
             },
         },
     },
