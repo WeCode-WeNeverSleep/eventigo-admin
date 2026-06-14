@@ -18,6 +18,8 @@ import { SessionCreate } from "./resources/sessions/SessionCreate";
 import { SessionEdit } from "./resources/sessions/SessionEdit";
 import { EventShow } from "./resources/events/EventShow";
 
+import { darkTheme, lightTheme } from "./theme/adminTheme";
+
 export const App = () => (
     <Admin dataProvider={dataProvider} authProvider={authProvider}>
         <Resource
