@@ -66,6 +66,14 @@ export const darkTheme: RaThemeOptions = {
                 },
             },
         },
+        MuiDrawer: {
+            styleOverrides: {
+                paper: {
+                    backgroundColor: "#0E1720",
+                    borderRight: "1px solid rgba(255,255,255,0.08)",
+                },
+            },
+        },
     },
 };
 
