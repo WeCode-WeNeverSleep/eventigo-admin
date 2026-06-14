@@ -98,17 +98,17 @@ export const darkTheme: RaThemeOptions = {
                     borderRadius: 12,
                     margin: "4px 8px",
                     fontWeight: 700,
-                    color: "#8E9AA4",
 
                     "&:hover": {
-                        backgroundColor: "rgba(19, 220, 246, 0.08)",
-                        color: "#13DCF6",
+                        backgroundColor: "rgba(0, 148, 205, 0.10)",
+                        color: "#0094CD",
                     },
 
                     "&.RaMenuItemLink-active": {
-                        backgroundColor: "rgba(19, 220, 246, 0.14)",
-                        color: "#13DCF6",
-                        borderLeft: "3px solid #13DCF6",
+                        backgroundColor: "rgba(0, 148, 205, 0.16)",
+                        color: "#0094CD",
+                        fontWeight: 800,
+                        borderLeft: "3px solid #0094CD",
                     },
                 },
             },

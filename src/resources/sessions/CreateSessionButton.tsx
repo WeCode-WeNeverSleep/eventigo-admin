@@ -27,6 +27,7 @@ export function CreateSessionButton({ eventId }: CreateSessionButtonProps) {
                 color: "primary.contrastText",
                 borderRadius: 999,
                 fontWeight: 800,
+                textTransform: "none",
                 "&:hover": {
                     backgroundColor: "primary.main",
                     opacity: 0.9,
