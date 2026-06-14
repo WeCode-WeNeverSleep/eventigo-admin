@@ -11,10 +11,11 @@ function StatCard({
     return (
         <Card>
             <CardContent>
-                <Typography variant="body2" color="text.secondary">
+                <Typography color="text.secondary" fontWeight={600}>
                     {label}
                 </Typography>
-                <Typography variant="h4" fontWeight={800} color="primary.main">
+
+                <Typography variant="h4" fontWeight={900} color="primary.main">
                     {value}
                 </Typography>
             </CardContent>
