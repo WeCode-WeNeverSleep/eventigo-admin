@@ -21,8 +21,10 @@ import { EventShow } from "./resources/events/EventShow";
 import { darkTheme, lightTheme } from "./theme/adminTheme";
 import { AdminLayout } from "./layout/AdminLayout";
 
+import { Dashboard } from "./dashboard/Dashboard";
+
 export const App = () => (
-    <Admin dataProvider={dataProvider} authProvider={authProvider} theme={lightTheme} darkTheme={darkTheme} defaultTheme="dark" layout={AdminLayout}>
+    <Admin dataProvider={dataProvider} authProvider={authProvider} theme={lightTheme} darkTheme={darkTheme} defaultTheme="dark" layout={AdminLayout} dashboard={Dashboard}>
         <Resource
             name="events"
             list={EventList}
