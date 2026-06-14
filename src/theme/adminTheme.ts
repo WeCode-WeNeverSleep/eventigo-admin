@@ -79,6 +79,27 @@ export const darkTheme: RaThemeOptions = {
                 },
             },
         },
+        RaMenuItemLink: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 12,
+                    margin: "4px 8px",
+                    fontWeight: 700,
+                    color: "#8E9AA4",
+
+                    "&:hover": {
+                        backgroundColor: "rgba(19, 220, 246, 0.08)",
+                        color: "#13DCF6",
+                    },
+
+                    "&.RaMenuItemLink-active": {
+                        backgroundColor: "rgba(19, 220, 246, 0.14)",
+                        color: "#13DCF6",
+                        borderLeft: "3px solid #13DCF6",
+                    },
+                },
+            },
+        },
     },
 };
 
