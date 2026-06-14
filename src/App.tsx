@@ -19,9 +19,10 @@ import { SessionEdit } from "./resources/sessions/SessionEdit";
 import { EventShow } from "./resources/events/EventShow";
 
 import { darkTheme, lightTheme } from "./theme/adminTheme";
+import { AdminLayout } from "./layout/AdminLayout";
 
 export const App = () => (
-    <Admin dataProvider={dataProvider} authProvider={authProvider}>
+    <Admin dataProvider={dataProvider} authProvider={authProvider} theme={lightTheme} darkTheme={darkTheme} defaultTheme="dark" layout={AdminLayout}>
         <Resource
             name="events"
             list={EventList}

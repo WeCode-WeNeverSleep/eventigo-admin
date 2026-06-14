@@ -33,6 +33,40 @@ export const darkTheme: RaThemeOptions = {
     shape: {
         borderRadius: 12,
     },
+    components: {
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 16,
+                    backgroundImage: "none",
+                },
+            },
+        },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 16,
+                    backgroundImage: "none",
+                },
+            },
+        },
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    borderRadius: 999,
+                    textTransform: "none",
+                    fontWeight: 700,
+                },
+            },
+        },
+        MuiTableCell: {
+            styleOverrides: {
+                head: {
+                    fontWeight: 800,
+                },
+            },
+        },
+    },
 };
 
 export const lightTheme: RaThemeOptions = {
