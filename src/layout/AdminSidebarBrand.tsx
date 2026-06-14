@@ -9,43 +9,51 @@ export function AdminSidebarBrand() {
                 py: 1.5,
                 display: "flex",
                 alignItems: "center",
-                gap: 1,
+                gap: 1.2,
                 borderBottom: "1px solid",
                 borderColor: "divider",
+                overflow: "hidden",
             }}
         >
             <Box
+                component="img"
+                src="/assets/logo.png"
+                alt="EventiGo"
                 sx={{
-                    width: 26,
-                    height: 26,
+                    width: 34,
+                    height: 34,
+                    objectFit: "contain",
                     flexShrink: 0,
-                    borderRadius: "50%",
-                    border: "1.5px solid",
-                    borderColor: "primary.main",
-                    color: "primary.main",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "0.75rem",
-                    fontWeight: 900,
+                }}
+            />
+
+            <Box
+                sx={{
+                    minWidth: 0,
+                    display: {
+                        xs: "none",
+                        sm: "block",
+                    },
                 }}
             >
-                E
-            </Box>
-
-            <Box sx={{ minWidth: 0 }}>
                 <Typography
                     fontWeight={900}
                     lineHeight={1}
-                    fontSize="0.9rem"
+                    fontSize="1.08rem"
                     noWrap
+                    sx={{ color: "text.primary" }}
                 >
-                    EventiGo
+                    Eventi
+                    <Box component="span" sx={{ color: "primary.main" }}>
+                        Go
+                    </Box>
                 </Typography>
+
                 <Typography
                     variant="caption"
                     color="text.secondary"
                     fontWeight={700}
+                    fontSize="0.72rem"
                     noWrap
                 >
                     Admin

@@ -79,6 +79,19 @@ export const darkTheme: RaThemeOptions = {
                 },
             },
         },
+        MuiIconButton: {
+            styleOverrides: {
+                root: {
+                    color: "#13DCF6",
+                    border: "1px solid rgba(19,220,246,0.25)",
+                    backgroundColor: "rgba(19,220,246,0.08)",
+
+                    "&:hover": {
+                        backgroundColor: "rgba(19,220,246,0.16)",
+                    },
+                },
+            },
+        },
         RaMenuItemLink: {
             styleOverrides: {
                 root: {

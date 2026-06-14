@@ -1,4 +1,4 @@
-import { AppBar, TitlePortal } from "react-admin";
+import { AppBar, ToggleThemeButton } from "react-admin";
 
 export function AdminAppBar() {
     return (
@@ -8,9 +8,14 @@ export function AdminAppBar() {
                 borderBottom: "1px solid",
                 borderColor: "divider",
                 boxShadow: "none",
+                color: "text.primary",
+
+                "& .RaAppBar-title": {
+                    display: "none",
+                },
             }}
         >
-            <TitlePortal />
+            <div style={{ flex: 1 }} />
         </AppBar>
     );
 }
