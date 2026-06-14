@@ -1,6 +1,10 @@
-import { defaultDarkTheme, defaultLightTheme } from "react-admin";
+import {
+    defaultDarkTheme,
+    defaultLightTheme,
+    type RaThemeOptions,
+} from "react-admin";
 
-export const darkTheme = {
+export const darkTheme: RaThemeOptions = {
     ...defaultDarkTheme,
     palette: {
         ...defaultDarkTheme.palette,
@@ -31,7 +35,7 @@ export const darkTheme = {
     },
 };
 
-export const lightTheme = {
+export const lightTheme: RaThemeOptions = {
     ...defaultLightTheme,
     palette: {
         ...defaultLightTheme.palette,
