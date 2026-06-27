@@ -5,6 +5,7 @@ import {
     List,
     TextField,
 } from "react-admin";
+import { CreateSessionButton } from "../sessions/CreateSessionButton";
 
 export function EventList() {
     return (
@@ -19,6 +20,7 @@ export function EventList() {
                     label="Sessions"
                     render={(record) => record._count?.sessions ?? 0}
                 />
+                <CreateSessionButton />
             </Datagrid>
         </List>
     );

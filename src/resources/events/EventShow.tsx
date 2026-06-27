@@ -9,6 +9,8 @@ import {
 } from "react-admin";
 import { EditSessionButton } from "../sessions/EditSessionButton";
 
+import { CreateSessionButton } from "../sessions/CreateSessionButton";
+
 export function EventShow() {
     return (
         <Show>
@@ -18,7 +20,7 @@ export function EventShow() {
                 <TextField source="location" />
                 <DateField source="startDate" showTime />
                 <DateField source="endDate" showTime />
-
+                <CreateSessionButton />
                 <ReferenceManyField
                     label="Sessions"
                     reference="sessions"
