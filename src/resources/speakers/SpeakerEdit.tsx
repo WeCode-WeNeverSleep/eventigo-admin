@@ -1,10 +1,11 @@
 import { Edit, SimpleForm, TextInput } from "react-admin";
 import { transformSpeakerPayload } from "./speakerTransforms";
+import { AdminToolbar } from "../../components/AdminToolbar";
 
 export function SpeakerEdit() {
     return (
         <Edit redirect="list" transform={transformSpeakerPayload}>
-            <SimpleForm>
+            <SimpleForm toolbar={<AdminToolbar />}>
                 <TextInput source="fullName" label="Full name" required />
                 <TextInput source="avatarUrl" label="Avatar URL" />
                 <TextInput source="bio" label="Bio" multiline />
