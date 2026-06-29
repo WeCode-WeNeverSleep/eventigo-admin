@@ -17,7 +17,7 @@ export function SessionCreate() {
   const eventId = searchParams.get("eventId");
 
   return (
-    <Create redirect="list" transform={transformSessionPayload}>
+    <Create redirect={`/events/${eventId}`} transform={transformSessionPayload}>
       <SimpleForm defaultValues={{ eventId }}>
         <TextInput source="title" label="Title" required />
         <TextInput source="description" label="Description" multiline />
