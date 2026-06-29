@@ -68,7 +68,7 @@ npm run build
 
 ## Contributors
 
-### Jessy — [`jessyrand`](https://github.com/jessyrand)
+### Jessy — `STD24004` [`jessyrand`](https://github.com/jessyrand)
 *Full CRUD, auth, theming, layout*
 - Project initialization (Vite, React, TypeScript, tooling)
 - Authentication provider (JWT login, auto-logout)
@@ -83,12 +83,13 @@ npm run build
 - AdminToolbar component
 - UI/UX refinements (favicon, interactive states, styling)
 
-### Manda — [`Manda Tiavina`](https://github.com/MandaTiavina)
+### Manda — `STD24083` [`Manda Tiavina`](https://github.com/MandaTiavina)
 *Project README*
 - Project README
 
-### Rindra — [`rindraniaina`](https://github.com/rindraniaina)
-*Project management & code review*
-- Pull request management and merging (#2, #3, #4)
+### Rindra — `STD24069` [`rindraniaina`](https://github.com/rindraniaina)
+*Project management, code review & dashboard*
+- Pull request management and merging
 - Code review and feature validation
+- Dashboard enhancement (event/session/room/speaker counts)
 - Branch coordination (pre-prod, feature branches)
