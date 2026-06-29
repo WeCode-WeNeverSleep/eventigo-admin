@@ -3,222 +3,218 @@ import { env } from "../config/env";
 import { httpClient } from "./httpClient";
 
 type Speaker = {
-    id: string;
+  id: string;
 };
 
 type SessionRecord = {
-    id: string;
-    speakers?: Speaker[];
-    speakerIds?: string[];
-    [key: string]: unknown;
+  id: string;
+  speakers?: Speaker[];
+  speakerIds?: string[];
+  [key: string]: unknown;
 };
 
 const getResourceUrl = (resource: string) => {
-    return `${env.apiUrl}/admin/${resource}`;
+  return `${env.apiUrl}/admin/${resource}`;
 };
 
 const getSessionResourceUrl = (eventId: string) => {
-    return `${env.apiUrl}/admin/events/${eventId}/sessions`;
+  return `${env.apiUrl}/admin/events/${eventId}/sessions`;
 };
 
 const normalizeSession = (session: SessionRecord) => {
-    return {
-        ...session,
-        speakerIds:
-            session.speakers?.map((speaker) => speaker.id) ??
-            session.speakerIds ??
-            [],
-    };
+  return {
+    ...session,
+    speakerIds:
+      session.speakers?.map((speaker) => speaker.id) ??
+      session.speakerIds ??
+      [],
+  };
 };
 
 export const dataProvider: DataProvider = {
-    getList: async (resource, params) => {
-        if (resource === "sessions") {
-            const eventId = params.filter?.eventId;
+  getList: async (resource, params) => {
+    if (resource === "sessions") {
+      const eventId = params.filter?.eventId;
 
-            if (!eventId) {
-                return {
-                    data: [],
-                    total: 0,
-                };
-            }
-
-            const data = await httpClient(getSessionResourceUrl(eventId));
-
-            return {
-                data: data.map(normalizeSession),
-                total: data.length,
-            };
-        }
-
-        const data = await httpClient(getResourceUrl(resource));
-
+      if (!eventId) {
         return {
-            data,
-            total: data.length,
+          data: [],
+          total: 0,
         };
-    },
+      }
 
-    getOne: async (resource, params) => {
-        if (resource === "sessions") {
-            const eventId =
-                params.meta?.eventId ??
-                new URLSearchParams(window.location.search).get("eventId");
+      const data = await httpClient(getSessionResourceUrl(eventId));
 
-            if (!eventId) {
-                throw new Error("Missing eventId for session details");
-            }
+      return {
+        data: data.map(normalizeSession),
+        total: data.length,
+      };
+    }
 
-            const data = await httpClient(
-                `${getSessionResourceUrl(eventId)}/${params.id}`
-            );
+    const data = await httpClient(getResourceUrl(resource));
 
-            return {
-                data: normalizeSession(data),
-            };
-        }
+    return {
+      data,
+      total: data.length,
+    };
+  },
 
-        const data = await httpClient(`${getResourceUrl(resource)}/${params.id}`);
+  getOne: async (resource, params) => {
+    if (resource === "sessions") {
+      const eventId =
+        params.meta?.eventId ??
+        new URLSearchParams(window.location.search).get("eventId");
 
-        return {
-            data,
-        };
-    },
+      if (!eventId) {
+        throw new Error("Missing eventId for session details");
+      }
 
-    getMany: async (resource, params) => {
-        const data = await Promise.all(
-            params.ids.map((id) =>
-                httpClient(`${getResourceUrl(resource)}/${id}`)
-            )
-        );
+      const data = await httpClient(
+        `${getSessionResourceUrl(eventId)}/${params.id}`,
+      );
 
-        return {
-            data,
-        };
-    },
+      return {
+        data: normalizeSession(data),
+      };
+    }
 
-    getManyReference: async (resource, params) => {
-        if (resource === "sessions" && params.target === "eventId") {
-            const data = await httpClient(getSessionResourceUrl(String(params.id)));
+    const data = await httpClient(`${getResourceUrl(resource)}/${params.id}`);
 
-            return {
-                data: data.map(normalizeSession),
-                total: data.length,
-            };
-        }
+    return {
+      data,
+    };
+  },
 
-        throw new Error(`getManyReference is not implemented for ${resource}`);
-    },
+  getMany: async (resource, params) => {
+    const data = await Promise.all(
+      params.ids.map((id) => httpClient(`${getResourceUrl(resource)}/${id}`)),
+    );
 
-    create: async (resource, params) => {
-        if (resource === "sessions") {
-            const eventId = params.data.eventId;
+    return {
+      data,
+    };
+  },
 
-            if (!eventId) {
-                throw new Error("Missing eventId for session creation");
-            }
+  getManyReference: async (resource, params) => {
+    if (resource === "sessions" && params.target === "eventId") {
+      const data = await httpClient(getSessionResourceUrl(String(params.id)));
 
-            const { eventId: _eventId, ...payload } = params.data;
+      return {
+        data: data.map(normalizeSession),
+        total: data.length,
+      };
+    }
 
-            const data = await httpClient(getSessionResourceUrl(eventId), {
-                method: "POST",
-                body: JSON.stringify(payload),
-            });
+    throw new Error(`getManyReference is not implemented for ${resource}`);
+  },
 
-            return {
-                data: normalizeSession(data),
-            };
-        }
+  create: async (resource, params) => {
+    if (resource === "sessions") {
+      const eventId = params.data.eventId;
 
-        const data = await httpClient(getResourceUrl(resource), {
-            method: "POST",
-            body: JSON.stringify(params.data),
-        });
+      if (!eventId) {
+        throw new Error("Missing eventId for session creation");
+      }
 
-        return {
-            data,
-        };
-    },
+      const { eventId: _eventId, ...payload } = params.data;
 
-    update: async (resource, params) => {
-        if (resource === "sessions") {
-            const eventId =
-                params.data.eventId ??
-                params.previousData?.eventId ??
-                params.meta?.eventId ??
-                new URLSearchParams(window.location.search).get("eventId");
+      const data = await httpClient(getSessionResourceUrl(eventId), {
+        method: "POST",
+        body: JSON.stringify(payload),
+      });
 
-            if (!eventId) {
-                throw new Error("Missing eventId for session update");
-            }
+      return {
+        data: normalizeSession(data),
+      };
+    }
 
-            const { eventId: _eventId, ...payload } = params.data;
+    const data = await httpClient(getResourceUrl(resource), {
+      method: "POST",
+      body: JSON.stringify(params.data),
+    });
 
-            const data = await httpClient(
-                `${getSessionResourceUrl(eventId)}/${params.id}`,
-                {
-                    method: "PUT",
-                    body: JSON.stringify(payload),
-                }
-            );
+    return {
+      data,
+    };
+  },
 
-            return {
-                data: normalizeSession(data),
-            };
-        }
+  update: async (resource, params) => {
+    if (resource === "sessions") {
+      const eventId =
+        params.data.eventId ??
+        params.previousData?.eventId ??
+        params.meta?.eventId ??
+        new URLSearchParams(window.location.search).get("eventId");
 
-        const data = await httpClient(`${getResourceUrl(resource)}/${params.id}`, {
-            method: "PUT",
-            body: JSON.stringify(params.data),
-        });
+      if (!eventId) {
+        throw new Error("Missing eventId for session update");
+      }
 
-        return {
-            data,
-        };
-    },
+      const { eventId: _eventId, ...payload } = params.data;
 
-    updateMany: async () => {
-        throw new Error("updateMany is not implemented yet");
-    },
+      const data = await httpClient(
+        `${getSessionResourceUrl(eventId)}/${params.id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(payload),
+        },
+      );
 
-    delete: async (resource, params) => {
-        if (resource === "sessions") {
-            const eventId =
-                params.previousData?.eventId ??
-                params.meta?.eventId ??
-                new URLSearchParams(window.location.search).get("eventId");
+      return {
+        data: normalizeSession(data),
+      };
+    }
 
-            if (!eventId) {
-                throw new Error("Missing eventId for session deletion");
-            }
+    const data = await httpClient(`${getResourceUrl(resource)}/${params.id}`, {
+      method: "PUT",
+      body: JSON.stringify(params.data),
+    });
 
-            await httpClient(
-                `${getSessionResourceUrl(eventId)}/${params.id}`,
-                {
-                    method: "DELETE",
-                }
-            );
-            if(!params.previousData) {
-                throw new Error("Missing previousData")
-            }
-            return {
-                data: params.previousData,
-            };
-        }
+    return {
+      data,
+    };
+  },
 
-        await httpClient(`${getResourceUrl(resource)}/${params.id}`, {
-            method: "DELETE",
-        });
+  updateMany: async () => {
+    throw new Error("updateMany is not implemented yet");
+  },
 
-        if(!params.previousData) {
-                throw new Error("Missing previousData")
-            }
-        return {
-            data: params.previousData,
-        };
-    },
+  delete: async (resource, params) => {
+    if (resource === "sessions") {
+      const eventId =
+        params.previousData?.eventId ??
+        params.meta?.eventId ??
+        new URLSearchParams(window.location.search).get("eventId");
 
-    deleteMany: async () => {
-        throw new Error("deleteMany is not implemented");
-    },
+      if (!eventId) {
+        throw new Error("Missing eventId for session deletion");
+      }
+
+      await httpClient(`${getSessionResourceUrl(eventId)}/${params.id}`, {
+        method: "DELETE",
+      });
+      if (!params.previousData) {
+        throw new Error("Missing previousData");
+      }
+      return {
+        data: params.previousData,
+      };
+    }
+
+    await httpClient(`${getResourceUrl(resource)}/${params.id}`, {
+      method: "DELETE",
+    });
+
+    if (!params.previousData) {
+      throw new Error("Missing previousData");
+    }
+    return {
+      data: params.previousData,
+    };
+  },
+
+  deleteMany: async () => {
+    throw new Error("deleteMany is not implemented");
+  },
 };
+

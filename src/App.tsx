@@ -24,30 +24,35 @@ import { AdminLayout } from "./layout/AdminLayout";
 import { Dashboard } from "./dashboard/Dashboard";
 
 export const App = () => (
-    <Admin dataProvider={dataProvider} authProvider={authProvider} theme={lightTheme} darkTheme={darkTheme} defaultTheme="dark" layout={AdminLayout} dashboard={Dashboard}>
-        <Resource
-            name="events"
-            list={EventList}
-            create={EventCreate}
-            edit={EventEdit}
-            show={EventShow}
-        />
-        <Resource
-            name="rooms"
-            list={RoomList}
-            create={RoomCreate}
-            edit={RoomEdit}
-        />
-        <Resource
-            name="speakers"
-            list={SpeakerList}
-            create={SpeakerCreate}
-            edit={SpeakerEdit}
-        />
-        <Resource 
-            name="sessions" 
-            edit={SessionEdit} 
-            create={SessionCreate} 
-        />
-    </Admin>
+  <Admin
+    dataProvider={dataProvider}
+    authProvider={authProvider}
+    theme={lightTheme}
+    darkTheme={darkTheme}
+    defaultTheme="dark"
+    layout={AdminLayout}
+    dashboard={Dashboard}
+  >
+    <Resource
+      name="events"
+      list={EventList}
+      create={EventCreate}
+      edit={EventEdit}
+      show={EventShow}
+    />
+    <Resource
+      name="rooms"
+      list={RoomList}
+      create={RoomCreate}
+      edit={RoomEdit}
+    />
+    <Resource
+      name="speakers"
+      list={SpeakerList}
+      create={SpeakerCreate}
+      edit={SpeakerEdit}
+    />
+    <Resource name="sessions" edit={SessionEdit} create={SessionCreate} />
+  </Admin>
 );
+
