@@ -181,8 +181,41 @@ export const dataProvider: DataProvider = {
         throw new Error("updateMany is not implemented yet");
     },
 
-    delete: async () => {
-        throw new Error("delete is not implemented");
+    delete: async (resource, params) => {
+        if (resource === "sessions") {
+            const eventId =
+                params.previousData?.eventId ??
+                params.meta?.eventId ??
+                new URLSearchParams(window.location.search).get("eventId");
+
+            if (!eventId) {
+                throw new Error("Missing eventId for session deletion");
+            }
+
+            await httpClient(
+                `${getSessionResourceUrl(eventId)}/${params.id}`,
+                {
+                    method: "DELETE",
+                }
+            );
+            if(!params.previousData) {
+                throw new Error("Missing previousData")
+            }
+            return {
+                data: params.previousData,
+            };
+        }
+
+        await httpClient(`${getResourceUrl(resource)}/${params.id}`, {
+            method: "DELETE",
+        });
+
+        if(!params.previousData) {
+                throw new Error("Missing previousData")
+            }
+        return {
+            data: params.previousData,
+        };
     },
 
     deleteMany: async () => {
