@@ -1,13 +1,16 @@
 import {
     DateTimeInput,
+    DeleteButton,
     Edit,
     NumberInput,
     ReferenceArrayInput,
     ReferenceInput,
+    SaveButton,
     SelectArrayInput,
     SelectInput,
     SimpleForm,
     TextInput,
+    Toolbar,
 } from "react-admin";
 import { useSearchParams } from "react-router-dom";
 import { transformSessionPayload } from "./sessionTransforms";
@@ -24,7 +27,17 @@ export function SessionEdit() {
             redirect="list"
             transform={transformSessionPayload}
         >
-            <SimpleForm>
+            <SimpleForm
+                toolbar={
+                    <Toolbar>
+                        <SaveButton />
+                        <DeleteButton
+                            mutationMode="pessimistic"
+                            mutationOptions={{ meta: { eventId } }}
+                        />
+                    </Toolbar>
+                }
+            >
                 <TextInput source="title" label="Title" required />
                 <TextInput source="description" label="Description" multiline />
                 <DateTimeInput source="startTime" label="Start time" required />
