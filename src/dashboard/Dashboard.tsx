@@ -1,5 +1,6 @@
+import React from "react";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
-import { Title, useGetList } from "react-admin";
+import { Title, useGetList, useDataProvider } from "react-admin";
 
 function StatCard({ label, value }: { label: string; value: number | string }) {
   return (
@@ -19,12 +20,9 @@ function StatCard({ label, value }: { label: string; value: number | string }) {
 
 export function Dashboard() {
   const now = new Date();
+  const dataProvider = useDataProvider();
 
   const { data: events, total: eventsTotal } = useGetList("events", {
-    pagination: { page: 1, perPage: 1000 },
-  });
-
-  const { data: sessions, total: sessionsTotal } = useGetList("sessions", {
     pagination: { page: 1, perPage: 1000 },
   });
 
@@ -35,6 +33,37 @@ export function Dashboard() {
   const { total: speakersTotal } = useGetList("speakers", {
     pagination: { page: 1, perPage: 1 },
   });
+
+  const [sessions, setSessions] = React.useState<any[]>([]);
+  const [isLoadingSessions, setIsLoadingSessions] = React.useState(true);
+
+  React.useEffect(() => {
+    async function fetchAllSessions() {
+      setIsLoadingSessions(true);
+      try {
+        const allSessions: any[] = [];
+        if (events) {
+          await Promise.all(
+            events.map(async (event: any) => {
+              try {
+                const { data } = await dataProvider.getList("sessions", {
+                  filter: { eventId: event.id },
+                  pagination: { page: 1, perPage: 1000 },
+                });
+                allSessions.push(...data);
+              } catch (e) {
+                console.error(`Error fetching sessions for event ${event.id}:`, e);
+              }
+            })
+          );
+        }
+        setSessions(allSessions);
+      } finally {
+        setIsLoadingSessions(false);
+      }
+    }
+    fetchAllSessions();
+  }, [events, dataProvider]);
 
   const liveEvents = events?.filter((e: any) => {
     const start = new Date(e.startDate);
@@ -60,7 +89,7 @@ export function Dashboard() {
     return end < now;
   }).length ?? 0;
 
-  const futureSessions = (sessionsTotal ?? 0) - liveSessions - passedSessions;
+  const futureSessions = sessions.length - liveSessions - passedSessions;
 
   return (
     <>
@@ -85,13 +114,13 @@ export function Dashboard() {
           <StatCard label="Future Events" value={futureEvents} />
         </Grid>
         <Grid size={{ xs: 12, md: 4 }}>
-          <StatCard label="Live Sessions" value={liveSessions} />
+          <StatCard label="Live Sessions" value={isLoadingSessions ? "..." : liveSessions} />
         </Grid>
         <Grid size={{ xs: 12, md: 4 }}>
-          <StatCard label="Passed Sessions" value={passedSessions} />
+          <StatCard label="Passed Sessions" value={isLoadingSessions ? "..." : passedSessions} />
         </Grid>
         <Grid size={{ xs: 12, md: 4 }}>
-          <StatCard label="Future Sessions" value={futureSessions} />
+          <StatCard label="Future Sessions" value={isLoadingSessions ? "..." : futureSessions} />
         </Grid>
         <Grid size={{ xs: 12, md: 4 }}>
           <StatCard label="Rooms" value={roomsTotal ?? "-"} />
