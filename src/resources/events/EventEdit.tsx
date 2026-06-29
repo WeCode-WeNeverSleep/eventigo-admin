@@ -14,6 +14,7 @@ import {
 import { Link } from "react-router-dom";
 import { EditSessionButton } from "../sessions/EditSessionButton";
 import { transformEventPayload } from "./eventTransforms";
+import { AdminToolbar } from "../../components/AdminToolbar";
 
 function EventSessionsList() {
     const event = useRecordContext();
@@ -53,8 +54,8 @@ function EventSessionsList() {
 
 export function EventEdit() {
     return (
-        <Edit redirect="list" transform={transformEventPayload}>
-            <SimpleForm>
+        <Edit redirect="list" transform={transformEventPayload} mutationMode="pessimistic">
+            <SimpleForm toolbar={<AdminToolbar />}>
                 <TextInput source="title" label="Title" required />
                 <TextInput source="description" label="Description" multiline />
                 <TextInput source="location" label="Location" required />
