@@ -34,6 +34,7 @@ export function SessionEdit() {
                         <DeleteButton
                             mutationMode="pessimistic"
                             mutationOptions={{ meta: { eventId } }}
+                            redirect={`/events/${eventId}`}
                         />
                     </Toolbar>
                 }

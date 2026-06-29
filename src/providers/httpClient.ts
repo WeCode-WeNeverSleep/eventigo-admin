@@ -23,5 +23,11 @@ export const httpClient = async (
         throw error;
     }
 
-    return response.json();
+    const text = await response.text();
+
+    if (!text) {
+        return null;
+    }
+
+    return JSON.parse(text);
 };
