@@ -87,7 +87,7 @@ npm run build
 *Project README*
 - Project README
 
-### Rindra — `STD24069` [`rindraniaina`](https://github.com/rindraniaina)
+### Rindra — `STD24069` [`rindra17`](https://github.com/rindra17)
 *Project management, code review & dashboard*
 - Pull request management and merging
 - Code review and feature validation
